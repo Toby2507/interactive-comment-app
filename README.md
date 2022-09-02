@@ -38,7 +38,7 @@ Users should be able to:
 ### Links
 
 - [Solution URL](https://github.com/Toby2507/interactive-comment-app)
-- [Live Site URL](https://your-live-site-url.com)
+- [Live Site URL](https://reactinteractivecomments.netlify.app/)
 
 ## My process
 

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import { useGlobal } from '../context'
 import { creationDateGenerator } from '../helperFunctions'
 
@@ -41,9 +41,6 @@ const CreateComment = ({ btnValue }) => {
         }
         textAreaRef.current.value = '';
     }
-    useEffect(() => {
-        isReplying && textAreaRef.current.focus()
-    })
     return (
         <section className="bg-white rounded-md w-full p-4">
             <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
