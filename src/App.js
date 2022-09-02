@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useGlobal } from "./context";
+// COMPONENTS
+import Comment from "./components/Comment";
+import CreateComment from "./components/CreateComment";
+import DeleteModal from "./components/DeleteModal";
 
-function App() {
+const App = () => {
+  const { currentUser, comments, isDeleting } = useGlobal();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="bg-veryLightGray font-primary">
+      <section className="container mx-auto flex min-h-screen flex-col space-y-6 px-4 py-8">
+        {comments.map((comment) => {
+          if (!comment.isReply)
+            return <Comment key={comment.id} {...comment} />;
+          return null;
+        })}
+        <CreateComment {...currentUser} btnValue="send" />
+        {isDeleting && <DeleteModal />}
+      </section>
+    </main>
   );
-}
+};
 
 export default App;
