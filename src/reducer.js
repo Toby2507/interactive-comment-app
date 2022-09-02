@@ -18,7 +18,7 @@ export const reducer = (state, action) => {
                 let deleteComment = state.comments.find(comment => comment.id === state.deleteId);
                 if (deleteComment.isReply) {
                     newComments = newComments.map(comment => {
-                        if (comment.id === deleteComment.replyingTo) return { ...comment, replies: comment.replies.filter(reply => reply !== state.deleteId) }
+                        if (comment.id === deleteComment.replyingTo.id) return { ...comment, replies: comment.replies.filter(reply => reply !== state.deleteId) }
                         return comment
                     })
                 }

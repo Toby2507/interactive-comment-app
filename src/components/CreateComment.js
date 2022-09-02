@@ -4,18 +4,19 @@ import { creationDateGenerator } from '../helperFunctions'
 
 const CreateComment = ({ btnValue }) => {
     const textAreaRef = useRef(null)
-    const { currentUser: { image: { webp }, username }, isReplying, replyId, replyComment, createComment } = useGlobal()
+    const { comments, currentUser: { image: { webp }, username }, isReplying, replyId, replyComment, createComment } = useGlobal()
     const handleSubmit = e => {
         e.preventDefault();
         if (textAreaRef.current.value.trim()) {
             if (isReplying && btnValue === 'reply') {
+                const { user: { username: fromuser }, id } = comments.find(comment => comment.id === replyId)
                 const newComment = {
                     id: Date.now(),
                     isReply: true,
                     content: textAreaRef.current.value,
                     createdAt: creationDateGenerator(),
                     score: 0,
-                    replyingTo: replyId,
+                    replyingTo: { fromuser, id },
                     user: {
                         image: { webp },
                         username

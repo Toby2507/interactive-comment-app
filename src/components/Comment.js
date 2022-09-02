@@ -10,7 +10,7 @@ import { AiOutlineMinus } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
-const Comment = ({ id, content, createdAt, score, user: { username, image: { webp } }, replies }) => {
+const Comment = ({ id, content, createdAt, score, user: { username, image: { webp } }, replies, isReply, replyingTo }) => {
     const { comments, isEditing, editId, isReplying, replyId, currentUser: { username: user }, alterScore, deleteComment, initiateReply, initiateEdit } = useGlobal();
     return (
         <div className='flex flex-col space-y-3'>
@@ -28,7 +28,7 @@ const Comment = ({ id, content, createdAt, score, user: { username, image: { web
                         <EditComment />
                     ) : (
                         <>
-                            <p className="text-base text-grayishBlue">{content}</p>
+                            <p className="text-base text-grayishBlue"><span className="text-moderateBlue font-medium pr-1">{isReply && `@${replyingTo.fromuser}`}</span>{content}</p>
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-3 px-3 py-1 rounded-md bg-veryLightGray">
                                     <button onClick={() => alterScore(id, "up")}><AiOutlinePlus className='text-sm text-grayishBlue hover:text-darkBlue' /></button>
@@ -73,7 +73,7 @@ const Comment = ({ id, content, createdAt, score, user: { username, image: { web
                         {isEditing && editId === id ? (
                             <EditComment />
                         ) : (
-                            <p className="text-base text-grayishBlue">{content}</p>
+                            <p className="text-base text-grayishBlue"><span className="text-moderateBlue font-medium pr-1">{isReply && `@${replyingTo.fromuser}`}</span>{content}</p>
                         )}
                     </div>
                 </div>
